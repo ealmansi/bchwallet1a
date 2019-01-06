@@ -2053,17 +2053,6 @@ eval("var toString = {}.toString;\n\nmodule.exports = Array.isArray || function 
 
 /***/ }),
 
-/***/ "./node_modules/isomorphic-fetch/fetch-npm-browserify.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/isomorphic-fetch/fetch-npm-browserify.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// the whatwg-fetch polyfill installs the fetch() function\n// on the global object (window or self)\n//\n// Return that as the export for use in Webpack, Browserify etc.\n__webpack_require__(/*! whatwg-fetch */ \"./node_modules/whatwg-fetch/fetch.js\");\nmodule.exports = self.fetch.bind(self);\n\n\n//# sourceURL=webpack:///./node_modules/isomorphic-fetch/fetch-npm-browserify.js?");
-
-/***/ }),
-
 /***/ "./node_modules/lodash/lodash.js":
 /*!***************************************!*\
   !*** ./node_modules/lodash/lodash.js ***!
@@ -2819,7 +2808,7 @@ eval("var Wallet = __webpack_require__(/*! ./wallet */ \"./src/wallet.js\")\n\nv
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("var bitcore = __webpack_require__(/*! bitcore-lib-cash */ \"./node_modules/bitcore-lib-cash/index.js\")\nvar fetch = __webpack_require__(/*! isomorphic-fetch */ \"./node_modules/isomorphic-fetch/fetch-npm-browserify.js\")\n\nfunction Wallet () {\n  console.log('Constructing a Wallet.')\n  console.log(bitcore)\n  console.log(fetch)\n}\n\nmodule.exports = Wallet\n\n\n//# sourceURL=webpack:///./src/wallet.js?");
+eval("var bitcore = __webpack_require__(/*! bitcore-lib-cash */ \"./node_modules/bitcore-lib-cash/index.js\")\nvar fetch = __webpack_require__(/*! whatwg-fetch */ \"./node_modules/whatwg-fetch/fetch.js\").fetch\n\nfunction Wallet () {\n  console.log('Constructing a Wallet.')\n  console.log(bitcore)\n  console.log(fetch)\n}\n\nmodule.exports = Wallet\n\n\n//# sourceURL=webpack:///./src/wallet.js?");
 
 /***/ }),
 

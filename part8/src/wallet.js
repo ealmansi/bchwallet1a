@@ -1,5 +1,5 @@
 var bitcore = require('bitcore-lib-cash')
-var fetch = require('isomorphic-fetch')
+var fetch = require('whatwg-fetch').fetch
 
 var DUST_LIMIT = 600
 
