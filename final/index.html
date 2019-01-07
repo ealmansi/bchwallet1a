@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bitcoin Cash Wallet: Single Address</title>
+  <script src="/bundle.js" defer></script>
+  <style>
+    * {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    input {
+      height: 35px;
+    }
+    button {
+      height: 35px;
+    }
+    noscript {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <noscript>
+    <h1>Please, enable JavaScript in order to use this application.</h1>
+  </noscript>
+  <p><a href="/license.html">FOR EDUCATIONAL PURPOSES ONLY - NO WARRANTY OF ANY KIND</a></p>
+  <section>
+    <h2>Balance</h2>
+    <span id="balance-display">... loading ...</span> satoshis
+  </section>
+  <section>
+    <h2>Deposit Address</h2>
+    <span id="deposit-address-display">... loading ...</span>
+  </section>
+  <section>
+    <h2>Withdrawal</h2>
+    <form id="withdrawal-form">
+      <input type="text" name="withdrawal-address" placeholder="Address" />
+      <input type="number" name="withdrawal-amount" placeholder="Amount" />
+      <button>Withdraw</button>
+    </form>
+  </section>
+  <section>
+    <h2>Import / Export</h2>
+    <form id="import-form">
+      <input type="text" name="private-key" placeholder="Private Key" />
+      <button>Import</button>
+    </form>
+    <div>
+      <button id="export-button">Show / Hide</button>
+      <span id="private-key-display">(hidden)</span>
+    </div>
+  </section>
+  <p><a href="/license.html">FOR EDUCATIONAL PURPOSES ONLY - NO WARRANTY OF ANY KIND</a></p>
+</body>
+</html>
