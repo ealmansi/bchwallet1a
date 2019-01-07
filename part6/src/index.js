@@ -26,17 +26,23 @@ wallet.getBalance().then(
     balanceDisplay.innerText = balance
   }
 ).catch(
-  function (err) {
-    alert(err.message || err.title || 'Unknown error.')
-  }
+  handleError
 )
 
 depositAddressDisplay.innerText = wallet.getDepositAddress()
 
 withdrawalForm.addEventListener('submit', function (event) {
   event.preventDefault()
-  var txid = wallet.withdraw(withdrawalAddress.value, withdrawalAmount.value)
-  alert(['Transaction ID:', txid].join(' '))
+  var withdrawalAddressValue = withdrawalAddress.value.trim()
+  var withdrawalAmountValue = +withdrawalAmount.value
+  wallet.withdraw(withdrawalAddressValue, withdrawalAmountValue).then(
+    function (txid) {
+      alert(['Transaction ID:', txid].join(' '))
+      window.location.reload()
+    }
+  ).catch(
+    handleError
+  )
 })
 
 importForm.addEventListener('submit', function (event) {
@@ -55,3 +61,7 @@ exportButton.addEventListener('click', function (event) {
     privateKeyDisplay.innerText = '(hidden)'
   }
 })
+
+function handleError (err) {
+  alert(err.message || err.title || 'Unknown error.')
+}

@@ -8,11 +8,23 @@ function Wallet (privateKey) {
   else {
     this._privateKey = new bitcore.PrivateKey()
   }
-  console.log(fetch)
 }
 
 Wallet.prototype.getBalance = function getBalance () {
-  return 'getBalance'
+  return fetch(
+    'https://rest.bitcoin.com/v1/address/details/' + this.getDepositAddress()
+  ).then(
+    function (res) {
+      if (!res.ok) {
+        throw new Error('Fetching balance failed. Please, try again later.')
+      }
+      return res.json()
+    }
+  ).then(
+    function (json) {
+      return json.balanceSat + json.unconfirmedBalanceSat
+    }
+  )
 }
 
 Wallet.prototype.getDepositAddress = function getDepositAddress () {

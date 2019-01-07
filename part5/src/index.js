@@ -21,7 +21,15 @@ var privateKey = document.getElementsByName('private-key').item(0)
 var exportButton = document.getElementById('export-button')
 var privateKeyDisplay = document.getElementById('private-key-display')
 
-balanceDisplay.innerText = wallet.getBalance()
+wallet.getBalance().then(
+  function (balance) {
+    balanceDisplay.innerText = balance
+  }
+).catch(
+  function (err) {
+    alert(err.message || err.title || 'Unknown error.')
+  }
+)
 
 depositAddressDisplay.innerText = wallet.getDepositAddress()
 

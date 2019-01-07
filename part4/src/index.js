@@ -1,6 +1,15 @@
 var Wallet = require('./wallet')
 
-var wallet = new Wallet()
+var STORAGE_KEY_PRIVATE_KEY = 'bchwallet1a:privateKey'
+
+var wallet
+if (localStorage.getItem(STORAGE_KEY_PRIVATE_KEY) !== null) {
+  wallet = new Wallet(localStorage.getItem(STORAGE_KEY_PRIVATE_KEY))
+}
+else {
+  wallet = new Wallet()
+  localStorage.setItem(STORAGE_KEY_PRIVATE_KEY, wallet.getPrivateKey())
+}
 
 var balanceDisplay = document.getElementById('balance-display')
 var depositAddressDisplay = document.getElementById('deposit-address-display')
@@ -24,7 +33,10 @@ withdrawalForm.addEventListener('submit', function (event) {
 
 importForm.addEventListener('submit', function (event) {
   event.preventDefault()
-  console.log('privateKey.value', privateKey.value)
+  var privateKeyValue = privateKey.value.trim()
+  localStorage.setItem(STORAGE_KEY_PRIVATE_KEY, privateKeyValue)
+  privateKey.value = ''
+  window.location.reload()
 })
 
 exportButton.addEventListener('click', function (event) {

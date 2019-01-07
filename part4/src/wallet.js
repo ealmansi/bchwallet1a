@@ -1,8 +1,13 @@
 var bitcore = require('bitcore-lib-cash')
 var fetch = require('whatwg-fetch').fetch
 
-function Wallet () {
-  this._privateKey = new bitcore.PrivateKey()
+function Wallet (privateKey) {
+  if (privateKey !== undefined) {
+    this._privateKey = bitcore.PrivateKey.fromWIF(privateKey)
+  }
+  else {
+    this._privateKey = new bitcore.PrivateKey()
+  }
   console.log(fetch)
 }
 

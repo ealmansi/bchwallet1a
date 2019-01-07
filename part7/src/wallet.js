@@ -1,6 +1,8 @@
 var bitcore = require('bitcore-lib-cash')
 var fetch = require('whatwg-fetch').fetch
 
+var DUST_LIMIT = 600
+
 function Wallet (privateKey) {
   if (privateKey !== undefined) {
     this._privateKey = bitcore.PrivateKey.fromWIF(privateKey)
@@ -50,11 +52,25 @@ Wallet.prototype.withdraw = function withdraw (address, amount) {
         },
         0
       )
-      var fee = 250
+      var fee1 = estimateTransactionBytes(utxos.length, 1)
+      var fee2 = estimateTransactionBytes(utxos.length, 2)
+      if (balance - amount < fee1) {
+        throw new Error('Insufficient balance.')
+      }
       var transaction = new bitcore.Transaction()
       transaction = transaction.from(utxos)
-      transaction = transaction.to(address, amount)
-      transaction = transaction.to(self.getDepositAddress(), balance - amount - fee)
+      if (balance - amount - fee2 < DUST_LIMIT) {
+        transaction = transaction.to(address, amount)
+      }
+      else {
+        if (new bitcore.Address(address).toString() === self.getDepositAddress()) {
+          transaction = transaction.to(self.getDepositAddress(), balance - fee1)
+        }
+        else {
+          transaction = transaction.to(address, amount)
+          transaction = transaction.to(self.getDepositAddress(), balance - amount - fee2)
+        }
+      }
       transaction = transaction.sign(self._privateKey)
       var rawTransaction = transaction.checkedSerialize()
       return fetch(
@@ -77,6 +93,10 @@ Wallet.prototype.withdraw = function withdraw (address, amount) {
       return text
     }
   )
+}
+
+function estimateTransactionBytes (inputCount, outputCount) {
+  return inputCount * 149 + outputCount * 34 + 10
 }
 
 Wallet.prototype.getPrivateKey = function getPrivateKey () {
