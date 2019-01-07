@@ -1,7 +1,0 @@
-1 - Development Setup.
-2 - UI Development.
-3 - UI Wiring.
-4 - Wallet Implementation: Private Key and Deposit Address.
-5 - Wallet Implementation: Balance.
-6 - Wallet Implementation: Basic Withdrawal.
-7 - Wallet Implementation: Advanced Withdrawal.
