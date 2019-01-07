@@ -1,6 +1,6 @@
 # Bitcoin Cash Wallet: Single Address
 
-Welcome to this tutorial on how to create a Bitcoin Cash wallet using JavaScript from scratch.
+Welcome to this tutorial on how to create a Bitcoin Cash wallet from scratch in JavaScript.
 
 ## Parts
 0. Introduction
