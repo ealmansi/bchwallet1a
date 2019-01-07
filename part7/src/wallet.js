@@ -52,6 +52,9 @@ Wallet.prototype.withdraw = function withdraw (address, amount) {
         },
         0
       )
+      if (amount < DUST_LIMIT) {
+        throw new Error('Output amount below dust limit.')
+      }
       var fee1 = estimateTransactionBytes(utxos.length, 1)
       var fee2 = estimateTransactionBytes(utxos.length, 2)
       if (balance - amount < fee1) {
