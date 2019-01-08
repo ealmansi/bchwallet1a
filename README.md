@@ -2,7 +2,7 @@
 
 Welcome to this tutorial on how to create a Bitcoin Cash wallet from scratch in JavaScript.
 
-## Tutorial Parts
+## Parts of this Tutorial
 
 0. Introduction
 1. Development Setup.
